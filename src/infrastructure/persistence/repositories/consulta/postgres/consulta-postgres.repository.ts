@@ -20,4 +20,19 @@ export class ConsultaPostgresRepository implements IConsultaRepository {
       throw new err;
     }
   }
+
+  async listar(crmOrCpf: string): Promise<Consulta[]> {
+    return this.prisma.consulta.findMany({
+      where: {
+        OR: [
+          {
+            crm_medico: crmOrCpf
+          },
+          {
+            cpf_paciente: crmOrCpf
+          }
+        ]
+      }
+    })
+  }
 }

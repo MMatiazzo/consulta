@@ -8,6 +8,8 @@ import { ConsultaControllerRoute } from '../api/http-rest/routes/consulta.routes
 import { CadastrarConsultaController } from '../operation/controller/consulta/criar-consulta/cadastrar-consulta.controller';
 import { IConsultaGateway } from '../operation/gateway/consulta/Iconsulta.gateway';
 import { ConsultaGateway } from '../operation/gateway/consulta/consulta.gateway';
+import { ListarConsultaUseCase } from 'src/core/consulta/usecase/listar-consulta/listar-consulta.usecase';
+import { ListarConsultaController } from '../operation/controller/consulta/listar-consulta/listar-consulta.controller';
 
 const persistenceProviders: Provider[] = [
   PrismaService,
@@ -31,6 +33,12 @@ const useCaseProviders: Provider[] = [
     useFactory: (consutlaGateway: IConsultaGateway) =>
       new CadastrarConsultaUseCase(consutlaGateway),
     inject: [IConsultaGateway],
+  },
+  {
+    provide: ListarConsultaUseCase,
+    useFactory: (consutlaGateway: IConsultaGateway) =>
+      new ListarConsultaUseCase(consutlaGateway),
+    inject: [IConsultaGateway],
   }
 ];
 
@@ -40,6 +48,12 @@ const controllerProviders: Provider[] = [
     useFactory: (cadastrarConsultaUseCase: CadastrarConsultaUseCase) =>
       new CadastrarConsultaController(cadastrarConsultaUseCase),
     inject: [CadastrarConsultaUseCase],
+  },
+  {
+    provide: ListarConsultaController,
+    useFactory: (listarConsultaUseCase: ListarConsultaUseCase) =>
+      new ListarConsultaController(listarConsultaUseCase),
+    inject: [ListarConsultaUseCase],
   }
 ];
 

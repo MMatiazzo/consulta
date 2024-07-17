@@ -1,8 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { Consulta } from 'src/core/consulta/entity/consulta.entity';
-import { IAgendaRepository } from 'src/infrastructure/persistence/repositories/agenda/Iagenda.repository';
-import { IConsultaGateway } from './Iconsulta.gateway';
 import { IConsultaRepository } from 'src/infrastructure/persistence/repositories/consulta/Iconsulta.repository';
+import { IConsultaGateway } from './Iconsulta.gateway';
 
 export class ConsultaGateway implements IConsultaGateway {
   constructor(
@@ -13,5 +12,9 @@ export class ConsultaGateway implements IConsultaGateway {
   async cadastrarConculta(consulta: Consulta): Promise<Consulta> {
     const agendaCadastrada = await this.consultaRepository.criar(consulta);
     return agendaCadastrada;
+  }
+
+  async listarConcultas(crmOrCpf: string): Promise<Consulta[]> {
+    return this.consultaRepository.listar(crmOrCpf);
   }
 }
