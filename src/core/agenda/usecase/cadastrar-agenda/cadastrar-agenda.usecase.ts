@@ -15,6 +15,6 @@ export class CadastrarAgendaUseCase {
     const novaAgenda = Agenda.new(payload)
 
     const agendaCadastrada = await this.agendaGateway.cadastrarAgenda(novaAgenda)
-    return novaAgenda;
+    return agendaCadastrada;
   }
 }
