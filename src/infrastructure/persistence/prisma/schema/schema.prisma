@@ -1,0 +1,34 @@
+generator client {
+    provider        = "prisma-client-js"
+    //output          = "../node_modules/.prisma/client"
+    output          = "../../../../../node_modules/.prisma/client"
+    previewFeatures = ["fullTextSearch", "driverAdapters"]
+    binaryTargets   = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Agenda {
+    id           String    @id @default(uuid())
+    crm_medico   String
+    data_horario DateTime
+    ocupado      Boolean
+    Consulta     Consulta?
+
+    @@map("agenda")
+}
+
+model Consulta {
+    id           String  @id @default(uuid())
+    agenda       Agenda  @relation(fields: [id_agenda], references: [id])
+    id_agenda    String  @unique
+    crm_medico   String
+    cpf_paciente String
+    status       String
+    realizada    Boolean
+
+    @@map("consulta")
+}
