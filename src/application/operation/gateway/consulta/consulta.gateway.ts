@@ -17,4 +17,13 @@ export class ConsultaGateway implements IConsultaGateway {
   async listarConcultas(crmOrCpf: string): Promise<Consulta[]> {
     return this.consultaRepository.listar(crmOrCpf);
   }
+
+  async buscarConsultaPorId(consultaId: string): Promise<Consulta | undefined> {
+    return this.consultaRepository.buscarPorId(consultaId);
+  }
+
+  async atualizaConculta(consultaId: string, status: string): Promise<Consulta> {
+    return this.consultaRepository.atualiza(consultaId, status);
+  }
+  
 }

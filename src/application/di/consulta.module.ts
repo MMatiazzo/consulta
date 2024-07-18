@@ -10,6 +10,8 @@ import { IConsultaGateway } from '../operation/gateway/consulta/Iconsulta.gatewa
 import { ConsultaGateway } from '../operation/gateway/consulta/consulta.gateway';
 import { ListarConsultaUseCase } from 'src/core/consulta/usecase/listar-consulta/listar-consulta.usecase';
 import { ListarConsultaController } from '../operation/controller/consulta/listar-consulta/listar-consulta.controller';
+import { AtualizarConsultaUseCase } from 'src/core/consulta/usecase/atualizar-consulta/atualizar-consulta.usecase';
+import { AtualizarConsultaController } from '../operation/controller/consulta/atualizar-consulta/atualizar-consulta.controller';
 
 const persistenceProviders: Provider[] = [
   PrismaService,
@@ -39,6 +41,12 @@ const useCaseProviders: Provider[] = [
     useFactory: (consutlaGateway: IConsultaGateway) =>
       new ListarConsultaUseCase(consutlaGateway),
     inject: [IConsultaGateway],
+  },
+  {
+    provide: AtualizarConsultaUseCase,
+    useFactory: (consutlaGateway: IConsultaGateway) =>
+      new AtualizarConsultaUseCase(consutlaGateway),
+    inject: [IConsultaGateway],
   }
 ];
 
@@ -54,6 +62,12 @@ const controllerProviders: Provider[] = [
     useFactory: (listarConsultaUseCase: ListarConsultaUseCase) =>
       new ListarConsultaController(listarConsultaUseCase),
     inject: [ListarConsultaUseCase],
+  },
+  {
+    provide: AtualizarConsultaController,
+    useFactory: (atualizarConsultaUseCase: AtualizarConsultaUseCase) =>
+      new AtualizarConsultaController(atualizarConsultaUseCase),
+    inject: [AtualizarConsultaUseCase],
   }
 ];
 

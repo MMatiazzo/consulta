@@ -1,5 +1,13 @@
 import { CadastrarConsultaDto } from "../dto/cadastrar-consulta.dto";
 
+export enum CONSULTA_STATUS {
+  SOLICITADA = 'solicitada',
+  RECUSADA = 'recusada',
+  ACEITA = 'aceita',
+  CANCELADA = 'cancelada',
+  REALIZADA = 'realizada'
+}
+
 export class Consulta {
   id_agenda: string;
   crm_medico: string;
@@ -9,7 +17,7 @@ export class Consulta {
   private constructor(paylod: CadastrarConsultaDto) {
     this.id_agenda = paylod.id_agenda;
     this.crm_medico = paylod.crm_medico;
-    this.cpf_paciente = paylod.cpf_paciente;
+    this.cpf_paciente = paylod.cpf_paciente; 
     this.status = paylod.status;
   }
 

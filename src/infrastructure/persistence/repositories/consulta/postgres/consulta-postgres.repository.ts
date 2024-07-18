@@ -35,4 +35,22 @@ export class ConsultaPostgresRepository implements IConsultaRepository {
       }
     })
   }
+
+  async buscarPorId(consultaId: string): Promise<Consulta | undefined> {
+    return this.prisma.consulta.findUnique({
+      where: {
+        id: consultaId
+      }
+    })
+  }
+
+  async atualiza(consultaId: string, status: string): Promise<Consulta> {
+    return this.prisma.consulta.update({
+      where: { id: consultaId },
+      data: {
+        status
+      }
+    })
+  }
+
 }
