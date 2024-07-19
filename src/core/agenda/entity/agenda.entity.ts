@@ -7,8 +7,8 @@ export class Agenda {
 
   private constructor(paylod: CadastrarAgendaDto) {
     this.crm_medico = paylod.crm;
-    this.data_horario = new Date(paylod.horario)
-    this.ocupado = false
+    this.data_horario = paylod.horario;
+    this.ocupado = false;
   }
 
   public static new(payload: CadastrarAgendaDto) {

@@ -22,13 +22,12 @@ model Agenda {
 }
 
 model Consulta {
-    id           String  @id @default(uuid())
-    agenda       Agenda  @relation(fields: [id_agenda], references: [id])
-    id_agenda    String  @unique
+    id           String @id @default(uuid())
+    agenda       Agenda @relation(fields: [id_agenda], references: [id])
+    id_agenda    String @unique
     crm_medico   String
     cpf_paciente String
     status       String
-    realizada    Boolean
 
     @@map("consulta")
 }

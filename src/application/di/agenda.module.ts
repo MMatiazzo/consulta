@@ -9,6 +9,8 @@ import { AgendaControllerRoute } from '../api/http-rest/routes/agenda.routes';
 import { CadastrarAgendaController } from '../operation/controller/agenda/cadastrar-agenda/cadastrar-agenda.controller';
 import { IAgendaGateway } from '../operation/gateway/agenda/Iagenda.gateway';
 import { AgendaGateway } from '../operation/gateway/agenda/agenda.gateway';
+import { BuscarAgendasDisponiveisController } from '../operation/controller/agenda/buscar-agendas-disponiveis/buscar-agendas-disponiveis.controller';
+import { BuscarAgendasDisponiveisUseCase } from 'src/core/agenda/usecase/buscar-agendas-disponiveis/buscar-agendas-disponiveis.usecase';
 
 const persistenceProviders: Provider[] = [
   PrismaService,
@@ -32,6 +34,12 @@ const useCaseProviders: Provider[] = [
     useFactory: (agendaGateway: IAgendaGateway) =>
       new CadastrarAgendaUseCase(agendaGateway),
     inject: [IAgendaGateway],
+  },
+  {
+    provide: BuscarAgendasDisponiveisUseCase,
+    useFactory: (agendaGateway: IAgendaGateway) =>
+      new BuscarAgendasDisponiveisUseCase(agendaGateway),
+    inject: [IAgendaGateway],
   }
 ];
 
@@ -41,6 +49,12 @@ const controllerProviders: Provider[] = [
     useFactory: (cadastrarAgendaUseCase: CadastrarAgendaUseCase) =>
       new CadastrarAgendaController(cadastrarAgendaUseCase),
     inject: [CadastrarAgendaUseCase],
+  },
+  {
+    provide: BuscarAgendasDisponiveisController,
+    useFactory: (buscarAgendasDisponiveisUseCase: BuscarAgendasDisponiveisUseCase) =>
+      new BuscarAgendasDisponiveisController(buscarAgendasDisponiveisUseCase),
+    inject: [BuscarAgendasDisponiveisUseCase],
   }
 ];
 

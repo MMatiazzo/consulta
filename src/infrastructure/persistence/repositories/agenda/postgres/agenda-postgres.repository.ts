@@ -16,4 +16,23 @@ export class AgendaPostgresRepository implements IAgendaRepository {
     });
     return novaAgenda;
   }
+
+  async buscar(crm: string | null): Promise<Agenda[]> {
+
+    let whereClause = {};
+
+    if (crm !== null) {
+      whereClause = {
+        crm_medico: crm
+      };
+    }
+
+    whereClause['ocupado'] = false
+
+    const agendas = await this.prisma.agenda.findMany({
+      where: whereClause
+    });
+
+    return agendas;
+  }
 }
