@@ -7,7 +7,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: pos-tech-diner-consulta-secret
+  name: consulta-secret
   namespace: postech
 data:
   DATABASE_URL: #{DATABASE_URL}#
@@ -18,7 +18,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pos-tech-diner-consulta-config-map
+  name: consulta-config-map
   namespace: postech
 data:
   AWS_REGION: "us-east-1"
@@ -27,27 +27,27 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pos-tech-diner-consulta-deployment
+  name: consulta-deployment
   namespace: postech
   labels:
-    app: pos-tech-diner-consulta-deployment
+    app: consulta-deployment
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: pos-tech-diner-consulta-deployment
+        app: consulta-deployment
     spec:
       containers:
-        - name: pos-tech-diner-consulta-image
+        - name: consulta-image
           image: #{POS_TECH_DINER_CLIENTE_IMAGE}#
           ports:
             - containerPort: 3334
           envFrom:
             - secretRef:
-                name: "pos-tech-diner-consulta-secret"
+                name: "consulta-secret"
             - configMapRef:
-                name: "pos-tech-diner-consulta-config-map"
+                name: "consulta-config-map"
           resources:
             requests:
               cpu: 100m
@@ -55,13 +55,13 @@ spec:
               cpu: 500m
   selector:
     matchLabels:
-      app: pos-tech-diner-consulta-deployment
+      app: consulta-deployment
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pos-tech-diner-consulta-service
+  name: consulta-service
   namespace: postech
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
@@ -74,4 +74,4 @@ spec:
       protocol: TCP
   type: LoadBalancer
   selector:
-    app: pos-tech-diner-consulta-deployment
+    app: consulta-deployment
