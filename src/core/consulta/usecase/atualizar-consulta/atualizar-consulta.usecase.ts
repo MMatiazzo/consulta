@@ -22,6 +22,9 @@ export class AtualizarConsultaUseCase {
     if (!consultaExiste) throw new BadRequestException('Consulta não existe')
 
     const consultaAtualizada = await this.consultaGateway.atualizaConculta(consultaId, payload.status);
+
+    //atualizar agenda
+
     return consultaAtualizada;
   }
 }

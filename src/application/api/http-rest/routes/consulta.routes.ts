@@ -20,19 +20,19 @@ export class ConsultaControllerRoute {
     private atualizarConsultaController: AtualizarConsultaController,
   ) { }
 
-  @Post('/')
+  @Post('/cadastrar')
   async cadastrar(@Body() payload: CadastrarConsultaDto): Promise<Consulta> {
     const consultaCriada = await this.criarConsultaController.handle(payload);
     return consultaCriada;
   }
 
-  @Get('/')
+  @Get('/listar')
   async listar(@Query() payload: ListarConsultasDto): Promise<Consulta[]> {
     const consultaCriada = await this.listarConsultaController.handle(payload.crmOrCpf);
     return consultaCriada;
   }
 
-  @Put('/:consultaId')
+  @Put('/atualizar/:consultaId')
   async atualizar(@Param() { consultaId }, @Body() payload: AtualizarConsultaDto): Promise<Consulta> {
     const consultaAtualizada = await this.atualizarConsultaController.handle(consultaId, payload);
     return consultaAtualizada;

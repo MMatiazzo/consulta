@@ -42,7 +42,7 @@ spec:
         - name: pos-tech-diner-consulta-image
           image: #{POS_TECH_DINER_CLIENTE_IMAGE}#
           ports:
-            - containerPort: 3332
+            - containerPort: 3334
           envFrom:
             - secretRef:
                 name: "pos-tech-diner-consulta-secret"
@@ -61,7 +61,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pos-tech-diner-cliente-service
+  name: pos-tech-diner-consulta-service
   namespace: postech
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb

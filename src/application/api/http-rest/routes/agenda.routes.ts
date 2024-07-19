@@ -16,13 +16,13 @@ export class AgendaControllerRoute {
 
   ) { }
 
-  @Post('/')
+  @Post('/cadastrar')
   async cadastrar(@Body() payload: CadastrarAgendaDto): Promise<Agenda> {
     const agendaCadastrada = await this.cadastrarAgendaController.handle(payload);
     return agendaCadastrada;
   }
 
-  @Get('/')
+  @Get('/buscar')
   async buscar(@Query() payload: BuscarAgendasDisponiveisDto): Promise<Agenda[]> {
     const agendasDisponiveis = await this.buscarAgendasDisponiveisController.handle(payload);
     return agendasDisponiveis;
