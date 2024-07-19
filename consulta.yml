@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: consulta-image
-          image: #{POS_TECH_DINER_CLIENTE_IMAGE}#
+          image: #{CONSULTA_IMAGE}#
           ports:
             - containerPort: 3334
           envFrom:
