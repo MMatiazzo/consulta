@@ -21,7 +21,7 @@ export class AtualizarConsultaUseCase {
     const consultaExiste = await this.consultaGateway.buscarConsultaPorId(consultaId)
     if (!consultaExiste) throw new BadRequestException('Consulta não existe')
 
-    const consultaAtualizada = await this.consultaGateway.atualizaConculta(consultaId, payload.status);
+    const consultaAtualizada = await this.consultaGateway.atualizaConsulta(consultaId, payload.status);
 
     //atualizar agenda
 

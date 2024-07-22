@@ -11,7 +11,7 @@ export class ListarConsultaUseCase {
   ) { }
 
   async execute(payload: string): Promise<Consulta[]> {
-    const consultas = await this.consultaGateway.listarConcultas(payload);
+    const consultas = await this.consultaGateway.listarConsultas(payload);
     return consultas;
   }
 }

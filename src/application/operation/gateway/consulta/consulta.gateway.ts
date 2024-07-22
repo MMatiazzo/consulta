@@ -9,12 +9,12 @@ export class ConsultaGateway implements IConsultaGateway {
     private consultaRepository: IConsultaRepository,
   ) { }
 
-  async cadastrarConculta(consulta: Consulta): Promise<Consulta> {
+  async cadastrarConsulta(consulta: Consulta): Promise<Consulta> {
     const agendaCadastrada = await this.consultaRepository.criar(consulta);
     return agendaCadastrada;
   }
 
-  async listarConcultas(crmOrCpf: string): Promise<Consulta[]> {
+  async listarConsultas(crmOrCpf: string): Promise<Consulta[]> {
     return this.consultaRepository.listar(crmOrCpf);
   }
 
@@ -22,7 +22,7 @@ export class ConsultaGateway implements IConsultaGateway {
     return this.consultaRepository.buscarPorId(consultaId);
   }
 
-  async atualizaConculta(consultaId: string, status: string): Promise<Consulta> {
+  async atualizaConsulta(consultaId: string, status: string): Promise<Consulta> {
     return this.consultaRepository.atualiza(consultaId, status);
   }
   
