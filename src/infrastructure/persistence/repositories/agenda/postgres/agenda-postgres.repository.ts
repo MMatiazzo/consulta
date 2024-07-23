@@ -35,4 +35,22 @@ export class AgendaPostgresRepository implements IAgendaRepository {
 
     return agendas;
   }
+
+  async buscarPorId(id: string): Promise<Agenda | null> {
+    const agenda = await this.prisma.agenda.findUnique({
+      where: {
+        id
+      }
+    });
+
+    return agenda;
+  }
+
+  async deletar(id: string): Promise<void> {
+    await this.prisma.agenda.delete({
+      where: {
+        id
+      }
+    });
+  }
 }

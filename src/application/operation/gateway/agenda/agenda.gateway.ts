@@ -18,4 +18,13 @@ export class AgendaGateway implements IAgendaGateway {
     const agendasDisponiveis = await this.agendaRepository.buscar(crm);
     return agendasDisponiveis
   }
+
+  async buscarAgendaPorId(id: string): Promise<Agenda> {
+    const agendaExiste = await this.agendaRepository.buscarPorId(id);
+    return agendaExiste
+  }
+
+  async deletarAgenda(id: string): Promise<void> {
+    await this.agendaRepository.deletar(id)
+  }
 }
