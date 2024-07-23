@@ -14,7 +14,7 @@ export class CadastrarConsultaUseCase {
   async execute(payload: CadastrarConsultaDto): Promise<Consulta> {
     const novaConsulta = Consulta.new(payload);
 
-    const agendaCadastrada = await this.consultaGateway.cadastrarConculta(novaConsulta);
+    const agendaCadastrada = await this.consultaGateway.cadastrarConsulta(novaConsulta);
     return agendaCadastrada;
   }
 }

@@ -11,6 +11,8 @@ import { IAgendaGateway } from '../operation/gateway/agenda/Iagenda.gateway';
 import { AgendaGateway } from '../operation/gateway/agenda/agenda.gateway';
 import { BuscarAgendasDisponiveisController } from '../operation/controller/agenda/buscar-agendas-disponiveis/buscar-agendas-disponiveis.controller';
 import { BuscarAgendasDisponiveisUseCase } from 'src/core/agenda/usecase/buscar-agendas-disponiveis/buscar-agendas-disponiveis.usecase';
+import { DeletarAgendaUseCase } from 'src/core/agenda/usecase/deletar-agenda/deletar-agenda.usecase';
+import { DeletarAgendaController } from '../operation/controller/agenda/deletar-agenda/deletar-agenda.controller';
 
 const persistenceProviders: Provider[] = [
   PrismaService,
@@ -40,6 +42,12 @@ const useCaseProviders: Provider[] = [
     useFactory: (agendaGateway: IAgendaGateway) =>
       new BuscarAgendasDisponiveisUseCase(agendaGateway),
     inject: [IAgendaGateway],
+  },
+  {
+    provide: DeletarAgendaUseCase,
+    useFactory: (agendaGateway: IAgendaGateway) =>
+      new DeletarAgendaUseCase(agendaGateway),
+    inject: [IAgendaGateway],
   }
 ];
 
@@ -55,6 +63,12 @@ const controllerProviders: Provider[] = [
     useFactory: (buscarAgendasDisponiveisUseCase: BuscarAgendasDisponiveisUseCase) =>
       new BuscarAgendasDisponiveisController(buscarAgendasDisponiveisUseCase),
     inject: [BuscarAgendasDisponiveisUseCase],
+  },
+  {
+    provide: DeletarAgendaController,
+    useFactory: (deletarAgendaUseCase: DeletarAgendaUseCase) =>
+      new DeletarAgendaController(deletarAgendaUseCase),
+    inject: [DeletarAgendaUseCase],
   }
 ];
 

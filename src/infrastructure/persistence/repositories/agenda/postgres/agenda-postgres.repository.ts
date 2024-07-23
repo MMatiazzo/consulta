@@ -27,12 +27,39 @@ export class AgendaPostgresRepository implements IAgendaRepository {
       };
     }
 
-    whereClause['ocupado'] = false
+    whereClause['ocupado'] = false;
 
     const agendas = await this.prisma.agenda.findMany({
       where: whereClause
     });
 
     return agendas;
+  }
+
+  async buscarPorId(id: string): Promise<Agenda | null> {
+    const agenda = await this.prisma.agenda.findUnique({
+      where: {
+        id
+      }
+    });
+
+    return agenda;
+  }
+
+  async deletar(id: string): Promise<void> {
+    await this.prisma.agenda.delete({
+      where: {
+        id
+      }
+    });
+  }
+
+  async atualizarStatus(agendaId: string, status: boolean): Promise<void> {
+    await this.prisma.agenda.update({
+      where: { id: agendaId },
+      data: {
+        ocupado: status
+      }
+    });
   }
 }

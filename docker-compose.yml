@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 3334:3334
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/consulta
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: consulta
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

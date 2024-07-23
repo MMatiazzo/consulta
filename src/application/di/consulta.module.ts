@@ -12,6 +12,10 @@ import { ListarConsultaUseCase } from 'src/core/consulta/usecase/listar-consulta
 import { ListarConsultaController } from '../operation/controller/consulta/listar-consulta/listar-consulta.controller';
 import { AtualizarConsultaUseCase } from 'src/core/consulta/usecase/atualizar-consulta/atualizar-consulta.usecase';
 import { AtualizarConsultaController } from '../operation/controller/consulta/atualizar-consulta/atualizar-consulta.controller';
+import { IAgendaGateway } from '../operation/gateway/agenda/Iagenda.gateway';
+import { AgendaPostgresRepository } from 'src/infrastructure/persistence/repositories/agenda/postgres/agenda-postgres.repository';
+import { IAgendaRepository } from 'src/infrastructure/persistence/repositories/agenda/Iagenda.repository';
+import { AgendaGateway } from '../operation/gateway/agenda/agenda.gateway';
 
 const persistenceProviders: Provider[] = [
   PrismaService,
@@ -22,10 +26,22 @@ const persistenceProviders: Provider[] = [
     inject: [PrismaService],
   },
   {
+    provide: IAgendaRepository,
+    useFactory: (prisma: PrismaService) =>
+      new AgendaPostgresRepository(prisma),
+    inject: [PrismaService],
+  },
+  {
     provide: IConsultaGateway,
     useFactory: (repository: IConsultaRepository) =>
       new ConsultaGateway(repository),
     inject: [IConsultaRepository],
+  },
+  {
+    provide: IAgendaGateway,
+    useFactory: (repository: IAgendaRepository) =>
+      new AgendaGateway(repository),
+    inject: [IAgendaRepository],
   }
 ];
 
@@ -44,9 +60,9 @@ const useCaseProviders: Provider[] = [
   },
   {
     provide: AtualizarConsultaUseCase,
-    useFactory: (consutlaGateway: IConsultaGateway) =>
-      new AtualizarConsultaUseCase(consutlaGateway),
-    inject: [IConsultaGateway],
+    useFactory: (consutlaGateway: IConsultaGateway, agendaGateway: IAgendaGateway) =>
+      new AtualizarConsultaUseCase(consutlaGateway, agendaGateway),
+    inject: [IConsultaGateway, IAgendaGateway],
   }
 ];
 
