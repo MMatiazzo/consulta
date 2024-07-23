@@ -27,7 +27,7 @@ export class AgendaPostgresRepository implements IAgendaRepository {
       };
     }
 
-    whereClause['ocupado'] = false
+    whereClause['ocupado'] = false;
 
     const agendas = await this.prisma.agenda.findMany({
       where: whereClause
@@ -50,6 +50,15 @@ export class AgendaPostgresRepository implements IAgendaRepository {
     await this.prisma.agenda.delete({
       where: {
         id
+      }
+    });
+  }
+
+  async atualizarStatus(agendaId: string, status: boolean): Promise<void> {
+    await this.prisma.agenda.update({
+      where: { id: agendaId },
+      data: {
+        ocupado: status
       }
     });
   }

@@ -3,12 +3,16 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { IConsultaGateway } from 'src/application/operation/gateway/consulta/Iconsulta.gateway';
 import { AtualizarConsultaDto } from '../../dto/atualizar-consulta.dto';
 import { Consulta, CONSULTA_STATUS } from '../../entity/consulta.entity';
+import { IAgendaGateway } from 'src/application/operation/gateway/agenda/Iagenda.gateway';
 
 @Injectable()
 export class AtualizarConsultaUseCase {
   constructor(
     @Inject(IConsultaGateway)
     private consultaGateway: IConsultaGateway,
+
+    @Inject(IAgendaGateway)
+    private agendaGateway: IAgendaGateway,
   ) { }
 
   async execute(consultaId: string, payload: AtualizarConsultaDto): Promise<Consulta> {
@@ -23,7 +27,9 @@ export class AtualizarConsultaUseCase {
 
     const consultaAtualizada = await this.consultaGateway.atualizaConsulta(consultaId, payload.status);
 
-    //atualizar agenda
+    const toStatus = !(payload.status !== CONSULTA_STATUS.ACEITA && payload.status !== CONSULTA_STATUS.SOLICITADA);
+
+    await this.agendaGateway.atualizarAgenda(consultaAtualizada.id_agenda, toStatus);
 
     return consultaAtualizada;
   }

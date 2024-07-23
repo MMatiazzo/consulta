@@ -25,6 +25,9 @@ export class AgendaGateway implements IAgendaGateway {
   }
 
   async deletarAgenda(id: string): Promise<void> {
-    await this.agendaRepository.deletar(id)
+    await this.agendaRepository.deletar(id);
+  }
+  async atualizarAgenda(agendaId: string, status: boolean): Promise<void> {
+    await this.agendaRepository.atualizarStatus(agendaId, status);
   }
 }
