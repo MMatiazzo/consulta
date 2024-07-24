@@ -1,9 +1,9 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
-import { IConsultaGateway } from 'src/application/operation/gateway/consulta/Iconsulta.gateway';
+import { IConsultaGateway } from '../../../../application/operation/gateway/consulta/Iconsulta.gateway';
 import { AtualizarConsultaDto } from '../../dto/atualizar-consulta.dto';
 import { Consulta, CONSULTA_STATUS } from '../../entity/consulta.entity';
-import { IAgendaGateway } from 'src/application/operation/gateway/agenda/Iagenda.gateway';
+import { IAgendaGateway } from '../../../../application/operation/gateway/agenda/Iagenda.gateway';
 
 @Injectable()
 export class AtualizarConsultaUseCase {

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { IAgendaGateway } from 'src/application/operation/gateway/agenda/Iagenda.gateway';
+import { IAgendaGateway } from '../../../../application/operation/gateway/agenda/Iagenda.gateway';
 import { BuscarAgendasDisponiveisDto } from '../../dto/buscar-agendas-disponiveis.dto';
 import { Agenda } from '../../entity/agenda.entity';
 

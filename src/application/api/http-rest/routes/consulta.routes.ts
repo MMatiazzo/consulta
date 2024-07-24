@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@nestjs/common';
-import { AtualizarConsultaController } from 'src/application/operation/controller/consulta/atualizar-consulta/atualizar-consulta.controller';
-import { CadastrarConsultaController } from 'src/application/operation/controller/consulta/criar-consulta/cadastrar-consulta.controller';
-import { ListarConsultaController } from 'src/application/operation/controller/consulta/listar-consulta/listar-consulta.controller';
-import { AtualizarConsultaDto } from 'src/core/consulta/dto/atualizar-consulta.dto';
-import { CadastrarConsultaDto } from 'src/core/consulta/dto/cadastrar-consulta.dto';
-import { ListarConsultasDto } from 'src/core/consulta/dto/listar-consulta.dto';
-import { Consulta } from 'src/core/consulta/entity/consulta.entity';
+import { AtualizarConsultaController } from '../../../../application/operation/controller/consulta/atualizar-consulta/atualizar-consulta.controller';
+import { CadastrarConsultaController } from '../../../../application/operation/controller/consulta/criar-consulta/cadastrar-consulta.controller';
+import { ListarConsultaController } from '../../../../application/operation/controller/consulta/listar-consulta/listar-consulta.controller';
+import { AtualizarConsultaDto } from '../../../../core/consulta/dto/atualizar-consulta.dto';
+import { CadastrarConsultaDto } from '../../../../core/consulta/dto/cadastrar-consulta.dto';
+import { ListarConsultasDto } from '../../../../core/consulta/dto/listar-consulta.dto';
+import { Consulta } from '../../../../core/consulta/entity/consulta.entity';
 
 @Controller('/consulta')
 export class ConsultaControllerRoute {

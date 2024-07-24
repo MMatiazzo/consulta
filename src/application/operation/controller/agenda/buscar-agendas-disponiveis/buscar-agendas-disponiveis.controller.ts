@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
-import { BuscarAgendasDisponiveisDto } from 'src/core/agenda/dto/buscar-agendas-disponiveis.dto';
-import { Agenda } from 'src/core/agenda/entity/agenda.entity';
-import { BuscarAgendasDisponiveisUseCase } from 'src/core/agenda/usecase/buscar-agendas-disponiveis/buscar-agendas-disponiveis.usecase';
+import { BuscarAgendasDisponiveisDto } from '../../../../../core/agenda/dto/buscar-agendas-disponiveis.dto';
+import { Agenda } from '../../../../../core/agenda/entity/agenda.entity';
+import { BuscarAgendasDisponiveisUseCase } from '../../../../../core/agenda/usecase/buscar-agendas-disponiveis/buscar-agendas-disponiveis.usecase';
 
 export class BuscarAgendasDisponiveisController {
   constructor(

@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Query } from '@nestjs/common';
-import { BuscarAgendasDisponiveisController } from 'src/application/operation/controller/agenda/buscar-agendas-disponiveis/buscar-agendas-disponiveis.controller';
-import { CadastrarAgendaController } from 'src/application/operation/controller/agenda/cadastrar-agenda/cadastrar-agenda.controller';
-import { DeletarAgendaController } from 'src/application/operation/controller/agenda/deletar-agenda/deletar-agenda.controller';
-import { BuscarAgendasDisponiveisDto } from 'src/core/agenda/dto/buscar-agendas-disponiveis.dto';
-import { CadastrarAgendaDto } from 'src/core/agenda/dto/cadastrar-agenda.dto';
-import { DeletarAgendaDto } from 'src/core/agenda/dto/deletar-agenda.dto';
-import { Agenda } from 'src/core/agenda/entity/agenda.entity';
+import { BuscarAgendasDisponiveisController } from '../../../../application/operation/controller/agenda/buscar-agendas-disponiveis/buscar-agendas-disponiveis.controller';
+import { CadastrarAgendaController } from '../../../../application/operation/controller/agenda/cadastrar-agenda/cadastrar-agenda.controller';
+import { DeletarAgendaController } from '../../../../application/operation/controller/agenda/deletar-agenda/deletar-agenda.controller';
+import { BuscarAgendasDisponiveisDto } from '../../../../core/agenda/dto/buscar-agendas-disponiveis.dto';
+import { CadastrarAgendaDto } from '../../../../core/agenda/dto/cadastrar-agenda.dto';
+import { DeletarAgendaDto } from '../../../../core/agenda/dto/deletar-agenda.dto';
+import { Agenda } from '../../../../core/agenda/entity/agenda.entity';
 
 @Controller('/agenda')
 export class AgendaControllerRoute {

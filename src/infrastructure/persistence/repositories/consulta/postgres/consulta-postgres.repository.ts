@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Consulta } from 'src/core/consulta/entity/consulta.entity';
-import { PrismaService } from 'src/infrastructure/persistence/prisma/prisma.service';
+import { Consulta } from '../../../../../core/consulta/entity/consulta.entity';
+import { PrismaService } from '../../../../../infrastructure/persistence/prisma/prisma.service';
 import { IConsultaRepository } from '../Iconsulta.repository';
 
 @Injectable()
