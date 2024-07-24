@@ -1,73 +1,98 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<p align="center"><img src="assets/logo.png" alt="Health&Med"/></p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### FIAP - Hackathon 2024 - SOAT4 - Grupo 11 
+- Alexandre Mikio Kimura Fukano - **RM 351127** (alexandremkimura@hotmail.com)
+- Lucas Proença Renó - **RM 351351** (lucasreno9@gmail.com)
+- Matheus Agusuto Leme Matiazzo - **RM 351128** (mathmatiazzo@gmail.com)
+- Vinicius Carloto Carnelocce - **RM 351126** (viniciuscarloto@gmail.com)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+### Links úteis
+[![Hackathon 2024](https://img.shields.io/badge/Hackathon%20(.pdf)-2024-blue?logo=readthedocs)](/assets/hackathon-soat.pdf)
+[![Documentação](https://img.shields.io/badge/Documentação%20Projeto-044464?logo=github)](https://github.com/lucasreno/docs-hackathon/)
+<br>
+[![Infraestrutura](https://img.shields.io/badge/Infraestrutura-gray?logo=github)](https://github.com/MMatiazzo/infra-hackathon)
+[![Microsserviço-Autenticacao](https://img.shields.io/badge/Microsserviço%20Autenticação-gray?logo=github)](https://github.com/MMatiazzo/autenticacao)
+[![Microsserviço-Consulta](https://img.shields.io/badge/Microsserviço%20Consulta-gray?logo=github)](https://github.com/MMatiazzo/consulta)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Microsserviço Consulta
+Este microsserviço é responsável por gerenciar os horários disponíveis dos médicos e realizar o agendamento de consultas. O banco de dados utilizado é o PostgreSQL e a API Gateway da AWS é utilizada para interceptar as requisições.
 
-## Installation
+## Rodando o projeto localmente
+Para rodar o projeto localmente, siga os passos abaixo:
 
-```bash
-$ npm install
-```
+- ### 1. Clone o projeto e utilize a branch principal `master`
+    ```bash
+    git clone https://github.com/MMatiazzo/consulta.git
+    cd consulta
+    ```
 
-## Running the app
+- ### 2. Execute o docker-compose
+    ```bash
+    docker-compose up --build
+    ```
+- ### 3. Aplicação
+     [http://localhost:3334](http://localhost:3334)
 
-```bash
-# development
-$ npm run start
+    _*O docker compose irá compilar a aplicação usando o Dockerfile e subir dois containers: um para a aplicação e outro para o banco de dados PostgreSQL._
 
-# watch mode
-$ npm run start:dev
+    _*Quando a aplicação estiver rodando localmente as rotas não estarão protegidas por autenticação._
 
-# production mode
-$ npm run start:prod
-```
+## Clean Architecture
+A arquitetura do projeto foi baseada no conceito de Clean Architecture, conforme a imagem abaixo:
+![Clean Architecture](https://github.com/lucasreno/docs-hackathon/blob/master/arquitetura/hackathon-clean-arch.drawio.png?raw=true)
 
-## Test
+## CI/CD
+O projeto está configurado para realizar integração contínua e entrega contínua com o Github Actions. O funcionamento do CI/CD é o seguinte:
 
-```bash
-# unit tests
-$ npm run test
+ - **Trigger**: A cada push/pull request na branch `master` ou manualmente.
+ - **Configuração**: Variáveis de ambiente definidas para a região AWS e repositório ECR.
+ - **Permissões**: Permissão de leitura para o conteúdo.
+ - **Jobs:**
+    - **Checkout**: O código é clonado no ambiente de execução do Github Actions.
+    - **Configure AWS Credentials**: As credenciais da AWS são configuradas.
+    - **Login ECR**: O Github Actions faz login no Elastic Container Registry da AWS.
+    - **Build Docker Image**: A imagem Docker é construída a partir do Dockerfile.
+    - **Push Docker Image**: A imagem Docker é enviada para o ECR.
+    - **Inject Secrets**: As variáveis de ambiente são injetadas no arquivo de configuração.
+    - **KubeConfig**: O arquivo de configuração do Kubernetes é configurado.
+    - **Pod Deployment**: O arquivo de configuração do Kubernetes é aplicado.
+    - **Refresh image**: O serviço é atualizado com a nova imagem.
+    - **Restart Service**: Reinicia o deployment do pod no EKS.
 
-# e2e tests
-$ npm run test:e2e
+## Postman
+Para testar a API, utilize o arquivo de coleção do Postman disponível aqui:
 
-# test coverage
-$ npm run test:cov
-```
+[collection.json](assets/postman.json)
 
-## Support
+## Stack
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- #### Principais
+    - TypeScript: Superset da linguagem JavaScript que adiciona tipagem estática opcional.
+    - Node.js: Ambiente de execução JavaScript server-side.
+    - npm: Gerenciador de pacotes do Node.js.
+    - NestJS: Framework para construção de aplicações server-side eficientes e escaláveis.
+    - Prisma: ORM para Node.js e TypeScript.
+    - AWS SDK: SDK para interagir com os serviços da AWS.
+    - SQS Client: Cliente para interagir com o Amazon Simple Queue Service.
 
-## Stay in touch
+- #### Testes
+    - Jest: Framework de testes em JavaScript.
+    - Cucumber: Ferramenta para executar testes de aceitação.
+    - NestJS Testing: Biblioteca para testar aplicações NestJS.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- #### Qualidade de Código
+    - ESLint: Ferramenta para identificar e reportar padrões encontrados no código ECMAScript/JavaScript.
+    - Prettier: Ferramenta para formatar o código.
+    - SonarQube: Ferramenta para análise contínua da qualidade do código.
 
-## License
+- #### Infraestrutura
+    - Github Actions: Ferramenta de integração contínua.
+    - Docker: Plataforma para desenvolvimento, envio e execução de aplicações em containers.
+    - Docker Compose: Ferramenta para definir e executar aplicações Docker multi-container.
 
-Nest is [MIT licensed](LICENSE).
+- #### Outros
+    - Git: Sistema de controle de versão distribuído.
+    - Github: Repositório de código na nuvem.
+    - Postman: Ferramenta para testar APIs.
