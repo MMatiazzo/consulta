@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { Consulta } from 'src/core/consulta/entity/consulta.entity';
-import { IConsultaRepository } from 'src/infrastructure/persistence/repositories/consulta/Iconsulta.repository';
+import { Consulta } from '../../../../core/consulta/entity/consulta.entity';
+import { IConsultaRepository } from '../../../../infrastructure/persistence/repositories/consulta/Iconsulta.repository';
 import { IConsultaGateway } from './Iconsulta.gateway';
 
 export class ConsultaGateway implements IConsultaGateway {

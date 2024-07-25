@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { IConsultaGateway } from 'src/application/operation/gateway/consulta/Iconsulta.gateway';
+import { IConsultaGateway } from '../../../../application/operation/gateway/consulta/Iconsulta.gateway';
 import { CadastrarConsultaDto } from '../../dto/cadastrar-consulta.dto';
 import { Consulta } from '../../entity/consulta.entity';
 

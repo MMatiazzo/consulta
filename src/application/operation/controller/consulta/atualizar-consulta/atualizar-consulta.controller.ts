@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
-import { AtualizarConsultaDto } from 'src/core/consulta/dto/atualizar-consulta.dto';
-import { Consulta } from 'src/core/consulta/entity/consulta.entity';
-import { AtualizarConsultaUseCase } from 'src/core/consulta/usecase/atualizar-consulta/atualizar-consulta.usecase';
+import { AtualizarConsultaDto } from '../../../../../core/consulta/dto/atualizar-consulta.dto';
+import { Consulta } from '../../../../../core/consulta/entity/consulta.entity';
+import { AtualizarConsultaUseCase } from '../../../../../core/consulta/usecase/atualizar-consulta/atualizar-consulta.usecase';
 
 export class AtualizarConsultaController {
   constructor(

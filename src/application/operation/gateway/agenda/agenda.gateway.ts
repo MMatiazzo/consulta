@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { Agenda } from 'src/core/agenda/entity/agenda.entity';
-import { IAgendaRepository } from 'src/infrastructure/persistence/repositories/agenda/Iagenda.repository';
+import { Agenda } from '../../../../core/agenda/entity/agenda.entity';
+import { IAgendaRepository } from '../../../../infrastructure/persistence/repositories/agenda/Iagenda.repository';
 import { IAgendaGateway } from './Iagenda.gateway';
 
 export class AgendaGateway implements IAgendaGateway {

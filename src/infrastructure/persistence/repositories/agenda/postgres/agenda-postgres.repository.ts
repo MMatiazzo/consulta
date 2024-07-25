@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Agenda } from 'src/core/agenda/entity/agenda.entity';
+import { Agenda } from '../../../../../core/agenda/entity/agenda.entity';
 import { IAgendaRepository } from '../Iagenda.repository';
-import { PrismaService } from 'src/infrastructure/persistence/prisma/prisma.service';
+import { PrismaService } from '../../../../../infrastructure/persistence/prisma/prisma.service';
 
 @Injectable()
 export class AgendaPostgresRepository implements IAgendaRepository {
